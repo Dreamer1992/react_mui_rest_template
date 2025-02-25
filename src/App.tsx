@@ -1,30 +1,53 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { alpha } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import AppNavbar from './components/AppNavbar/AppNavbar';
+import Header from './components/Header/Header';
+import SideMenu from './components/SideMenu/SideMenu';
+import ThemeProvider from './providers/themeProvider/ThemeProvider';
+import MainContent from './components/MainContent/MainContent';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+function App(props: { disableCustomTheme?: boolean }) {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <ThemeProvider {...props}>
+      <CssBaseline enableColorScheme />
+
+      <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
+        <SideMenu />
+
+        <AppNavbar />
+
+        {/* Main content */}
+        <Box
+          component="main"
+          sx={(theme) => {
+            console.log('theme', theme);
+            return {
+              flexGrow: 1,
+              backgroundColor: theme.vars
+                ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+                : alpha(theme.palette.background.default, 1),
+              overflow: 'auto',
+            };
+          }}
+        >
+          <Stack
+            spacing={2}
+            sx={{
+              alignItems: 'center',
+              mx: 3,
+              // pb: 5,
+              mt: { xs: 8, md: 0 },
+            }}
+          >
+            <Header />
+
+            <MainContent />
+          </Stack>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
 
