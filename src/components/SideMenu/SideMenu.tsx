@@ -5,9 +5,9 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import SelectContent from './components/SelectContent/SelectContent';
 import OptionsMenu from './components/OptionsMenu/OptionsMenu';
-import MenuContent from '../common/MenuContent/MenuContent';
+import SelectContent from './components/SelectContent/SelectContent';
+import MenuContent from '@/components/common/MenuContent/MenuContent';
 
 const drawerWidth = 240;
 

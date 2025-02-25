@@ -6,8 +6,8 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
-import MenuButton from '../../../common/MenuButton/MenuButton';
-import MenuContent from '../../../common/MenuContent/MenuContent';
+import MenuButton from '@/components/common/MenuButton/MenuButton';
+import MenuContent from '@/components/common/MenuContent/MenuContent';
 
 interface SideMenuMobileProps {
   open: boolean | undefined;

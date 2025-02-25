@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Copyright from '../common/Copyright/Copyright';
+import Copyright from '@/components/common/Copyright/Copyright';
 
 const MainContent = () => {
   return (

@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon, { listItemIconClasses } from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
-import MenuButton from '../../../common/MenuButton/MenuButton';
+import MenuButton from '@/components/common/MenuButton/MenuButton';
 
 const MenuItem = styled(MuiMenuItem)({
   margin: '2px 0',

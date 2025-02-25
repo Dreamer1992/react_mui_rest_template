@@ -1,8 +1,8 @@
 import Stack from '@mui/material/Stack';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import NavbarBreadcrumbs from './components/NavbarBreadcrumbs/NavbarBreadcrumbs';
-import MenuButton from '../common/MenuButton/MenuButton';
-import ColorModeIconDropdown from '../common/ColorModeIconDropdown/ColorModeIconDropdown';
+import MenuButton from '@/components/common/MenuButton/MenuButton';
+import ColorModeIconDropdown from '@/components/common/ColorModeIconDropdown/ColorModeIconDropdown';
 
 export default function Header() {
   return (

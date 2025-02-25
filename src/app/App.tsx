@@ -2,13 +2,14 @@ import { alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import AppNavbar from './components/AppNavbar/AppNavbar';
-import Header from './components/Header/Header';
-import SideMenu from './components/SideMenu/SideMenu';
-import ThemeProvider from './providers/themeProvider/ThemeProvider';
-import MainContent from './components/MainContent/MainContent';
+import AppNavbar from '@/components/AppNavbar/AppNavbar';
+import Header from '@/components/Header/Header';
+import SideMenu from '@/components/SideMenu/SideMenu';
+import ThemeProvider from '@/providers/themeProvider/ThemeProvider';
+import MainContent from '@/components/MainContent/MainContent';
+import { observer } from 'mobx-react-lite';
 
-function App(props: { disableCustomTheme?: boolean }) {
+const App = observer((props: { disableCustomTheme?: boolean }) => {
   return (
     <ThemeProvider {...props}>
       <CssBaseline enableColorScheme />
@@ -22,7 +23,6 @@ function App(props: { disableCustomTheme?: boolean }) {
         <Box
           component="main"
           sx={(theme) => {
-            console.log('theme', theme);
             return {
               flexGrow: 1,
               backgroundColor: theme.vars
@@ -49,6 +49,6 @@ function App(props: { disableCustomTheme?: boolean }) {
       </Box>
     </ThemeProvider>
   );
-}
+});
 
 export default App;

@@ -6,11 +6,10 @@ import MuiToolbar from '@mui/material/Toolbar';
 import { tabsClasses } from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-
-import SideMenuMobile from './components/SideMenuMobile/SideMenuMobile';
-import MenuButton from '../common/MenuButton/MenuButton';
+import MenuButton from '@/components/common/MenuButton/MenuButton';
+import ColorModeIconDropdown from '@/components/common/ColorModeIconDropdown/ColorModeIconDropdown';
 import DashboardRoundedIcon from './components/DashboardRoundedIcon/DashboardRoundedIcon';
-import ColorModeIconDropdown from '../common/ColorModeIconDropdown/ColorModeIconDropdown';
+import SideMenuMobile from './components/SideMenuMobile/SideMenuMobile';
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',
