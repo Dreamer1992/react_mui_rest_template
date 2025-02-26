@@ -4,7 +4,9 @@ import MainLayout from '@/layouts/MainLayout';
 import AuthLayout from '@/layouts/AuthLayout';
 
 const SignIn = lazy(() => import('@/pages/auth/SignIn/SignIn'));
-// const SignUp = lazy(() => import('@/pages/auth/SignUp'));
+const SignUp = lazy(() => import('@/pages/auth/SignUp/SignUp'));
+
+const MainContent = lazy(() => import('@/components/MainContent/MainContent'));
 
 // const Dashboard = lazy(() => import('@/pages/Dashboard'));
 
@@ -14,7 +16,7 @@ export const publicRoutes = [
     element: <AuthLayout />,
     children: [
       { path: 'sign-in', element: <SignIn /> },
-      // { path: 'sign-up', element: <SignUp /> },
+      { path: 'sign-up', element: <SignUp /> },
       { path: '*', element: <Navigate to="/auth/sign-in" replace /> },
     ],
   },
@@ -29,7 +31,7 @@ export const protectedRoutes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      // { path: 'dashboard', element: <Dashboard /> },
+      { path: 'dashboard', element: <MainContent /> },
       { path: '', element: <Navigate to="/dashboard" replace /> },
       { path: '*', element: <Navigate to="/dashboard" replace /> },
     ],

@@ -5,8 +5,9 @@ import Box from '@mui/material/Box';
 import ThemeProvider from '@/providers/themeProvider/ThemeProvider';
 import { publicRoutes, protectedRoutes } from '@/routes/routes';
 import { useAuth } from '@/hooks/useAuth';
+import { observer } from 'mobx-react-lite';
 
-const App = (props: { disableCustomTheme?: boolean }) => {
+const App = observer((props: { disableCustomTheme?: boolean }) => {
   const { isAuthenticated } = useAuth();
 
   const routes = useRoutes(isAuthenticated ? protectedRoutes : publicRoutes);
@@ -24,6 +25,6 @@ const App = (props: { disableCustomTheme?: boolean }) => {
       </Suspense>
     </ThemeProvider>
   );
-};
+});
 
 export default App;

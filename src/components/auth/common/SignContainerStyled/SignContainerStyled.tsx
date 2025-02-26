@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 
-const SignInContainerStyled = styled(Stack)(({ theme }) => ({
+const SignContainerStyled = styled(Stack)(({ theme }) => ({
   height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
   minHeight: '100%',
   padding: theme.spacing(2),
@@ -22,4 +22,4 @@ const SignInContainerStyled = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default SignInContainerStyled;
+export default SignContainerStyled;

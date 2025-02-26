@@ -2,9 +2,9 @@ import Grid from '@mui/material/Grid2';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Copyright from '@/components/common/Copyright/Copyright';
+import { observer } from 'mobx-react-lite';
 
-const MainContent = () => {
+const MainContent = observer(() => {
   return (
     <Box
       sx={{
@@ -12,7 +12,6 @@ const MainContent = () => {
         flexDirection: 'column',
         width: '100%',
         maxWidth: { sm: '100%', md: '1900px' },
-        minHeight: { xs: 'calc(100dvh - 80px)', md: 'calc(100dvh - 64px)' },
       }}
     >
       <Box sx={{ flexGrow: 1 }}>
@@ -30,10 +29,8 @@ const MainContent = () => {
           </Grid>
         </Grid>
       </Box>
-
-      <Copyright />
     </Box>
   );
-};
+});
 
 export default MainContent;

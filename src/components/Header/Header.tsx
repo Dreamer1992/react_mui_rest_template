@@ -3,8 +3,9 @@ import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import NavbarBreadcrumbs from './components/NavbarBreadcrumbs/NavbarBreadcrumbs';
 import MenuButton from '@/components/common/MenuButton/MenuButton';
 import ColorModeIconDropdown from '@/components/common/ColorModeIconDropdown/ColorModeIconDropdown';
+import { observer } from 'mobx-react-lite';
 
-export default function Header() {
+const Header = observer(() => {
   return (
     <Stack
       direction="row"
@@ -28,4 +29,6 @@ export default function Header() {
       </Stack>
     </Stack>
   );
-}
+});
+
+export default Header;

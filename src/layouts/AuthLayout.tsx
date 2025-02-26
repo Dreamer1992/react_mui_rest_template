@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
+import { Box, Container, CssBaseline } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 
-const AuthLayout = () => {
+const AuthLayout = observer(() => {
   return (
     <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
       <CssBaseline enableColorScheme />
@@ -15,6 +14,6 @@ const AuthLayout = () => {
       </Container>
     </Box>
   );
-};
+});
 
 export default AuthLayout;

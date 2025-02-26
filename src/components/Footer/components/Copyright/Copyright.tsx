@@ -1,7 +1,7 @@
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
+import { Typography, Link } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 
-const Copyright = () => {
+const Copyright = observer(() => {
   return (
     <Typography variant="body2" align="center" sx={[{ color: 'text.secondary', py: 3 }]}>
       {'Copyright © '}
@@ -12,6 +12,6 @@ const Copyright = () => {
       {'.'}
     </Typography>
   );
-};
+});
 
 export default Copyright;

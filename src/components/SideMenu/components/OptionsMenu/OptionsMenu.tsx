@@ -10,13 +10,14 @@ import ListItemIcon, { listItemIconClasses } from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from '@/components/common/MenuButton/MenuButton';
+import { observer } from 'mobx-react-lite';
 
 const MenuItem = styled(MuiMenuItem)({
   margin: '2px 0',
 });
 
-const OptionsMenu = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+const OptionsMenu = observer(() => {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const open = Boolean(anchorEl);
 
@@ -33,6 +34,7 @@ const OptionsMenu = () => {
       <MenuButton aria-label="Open menu" onClick={handleClick} sx={{ borderColor: 'transparent' }}>
         <MoreVertRoundedIcon />
       </MenuButton>
+
       <Menu
         anchorEl={anchorEl}
         id="menu"
@@ -76,6 +78,6 @@ const OptionsMenu = () => {
       </Menu>
     </React.Fragment>
   );
-};
+});
 
 export default OptionsMenu;

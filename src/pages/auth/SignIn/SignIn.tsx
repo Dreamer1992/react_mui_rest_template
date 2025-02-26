@@ -1,77 +1,66 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import SignInCardStyled from '@/components/SignInPage/SignInCardStyled/SignInCardStyled';
-import ColorModeSelect from '@/components/SignInPage/ColorModeSelect/ColorModeSelect';
-import SignInContainerStyled from '@/components/SignInPage/SignInContainerStyled/SignInContainerStyled';
+import { useState } from 'react';
+import { Box, Button, Link, Typography } from '@mui/material';
 import SitemarkIcon from '@/icons/SitemarkIcon/SitemarkIcon';
-import FacebookIcon from '@/icons/FacebookIcon/FacebookIcon';
-import GoogleIcon from '@/icons/GoogleIcon/GoogleIcon';
-import ForgotPassword from '@/components/SignInPage/ForgotPassword/ForgotPassword';
+import SignContainerStyled from '@/components/auth/common/SignContainerStyled/SignContainerStyled';
+import ColorModeSelect from '@/components/auth/common/ColorModeSelect/ColorModeSelect';
+import SignCardStyled from '@/components/auth/common/SignCardStyled/SignCardStyled';
+import ForgotPassword from '@/components/auth/SignInPage/ForgotPassword/ForgotPassword';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { FormInputText } from '@/components/form/FormInputText/FormInputText';
+import {
+  signInSchema,
+  signInSchemaDefaultValues,
+  TSignInSchema,
+} from '@/components/auth/SignInPage/schema/signInSchema';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '@/store';
+import { IUser, USER_ROLES } from '@/types/user';
+import { Link as RouterLink } from 'react-router-dom';
 
-const SignIn = () => {
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-  const [emailError, setEmailError] = React.useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
+const SignIn = observer(() => {
+  const { userStore } = useStore();
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [openForgotPassword, setOpenForgotPassword] = useState(false);
+
+  const formMethods = useForm<TSignInSchema>({
+    resolver: zodResolver(signInSchema),
+    mode: 'all',
+    defaultValues: signInSchemaDefaultValues,
+  });
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = formMethods;
+
+  const isDisabled = Object.keys(errors).length > 0;
+
+  const handleForgotPasswordOpen = () => {
+    setOpenForgotPassword(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleForgotPasswordClose = () => {
+    setOpenForgotPassword(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (emailError || passwordError) {
-      event.preventDefault();
-      return;
-    }
-    // const data = new FormData(event.currentTarget);
-  };
+  const handleSignIn = (data: TSignInSchema) => {
+    const user: IUser = {
+      email: data.email,
+      firstName: 'John',
+      lastName: 'Carter',
+      role: USER_ROLES.GUEST,
+    };
 
-  const validateInputs = () => {
-    const email = document.getElementById('email') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
-
-    let isValid = true;
-
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage('');
-    }
-
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage('');
-    }
-
-    return isValid;
+    userStore.user = user;
   };
 
   return (
-    <SignInContainerStyled direction="column" justifyContent="space-between">
+    <SignContainerStyled direction="column" justifyContent="space-between">
       <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
 
-      <SignInCardStyled variant="outlined">
+      <SignCardStyled variant="outlined">
         <SitemarkIcon />
 
         <Typography component="h1" variant="h4" sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}>
@@ -80,7 +69,7 @@ const SignIn = () => {
 
         <Box
           component="form"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(handleSignIn)}
           noValidate
           sx={{
             display: 'flex',
@@ -89,58 +78,49 @@ const SignIn = () => {
             gap: 2,
           }}
         >
-          <FormControl>
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <TextField
-              error={emailError}
-              helperText={emailErrorMessage}
-              id="email"
-              type="email"
-              name="email"
-              placeholder="your@email.com"
-              autoComplete="email"
-              autoFocus
-              required
-              fullWidth
-              variant="outlined"
-              color={emailError ? 'error' : 'primary'}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="password">Password</FormLabel>
-            <TextField
-              error={passwordError}
-              helperText={passwordErrorMessage}
-              name="password"
-              placeholder="••••••"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              autoFocus
-              required
-              fullWidth
-              variant="outlined"
-              color={passwordError ? 'error' : 'primary'}
-            />
-          </FormControl>
+          <FormInputText
+            control={control}
+            name="email"
+            label="Email"
+            required
+            placeholder="john@email.com"
+            type="email"
+            autoComplete="email"
+          />
 
-          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+          <FormInputText
+            control={control}
+            name="password"
+            label="Password"
+            required
+            placeholder="••••••"
+            type="password"
+            autoComplete="new-password"
+          />
 
-          <ForgotPassword open={open} handleClose={handleClose} />
+          <ForgotPassword open={openForgotPassword} handleClose={handleForgotPasswordClose} />
 
-          <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
+          <Button type="submit" fullWidth variant={isDisabled ? 'outlined' : 'contained'} disabled={isDisabled}>
             Sign in
           </Button>
 
-          <Link component="button" type="button" onClick={handleClickOpen} variant="body2" sx={{ alignSelf: 'center' }}>
+          <Link
+            component="button"
+            type="button"
+            onClick={handleForgotPasswordOpen}
+            variant="body2"
+            sx={{ alignSelf: 'center' }}
+          >
             Forgot your password?
           </Link>
         </Box>
 
-        <Divider>or</Divider>
+        {/* <Divider>
+          <Typography sx={{ color: 'text.secondary' }}>or</Typography>
+        </Divider> */}
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <Button fullWidth variant="outlined" onClick={() => alert('Sign in with Google')} startIcon={<GoogleIcon />}>
+          {/* <Button fullWidth variant="outlined" onClick={() => alert('Sign in with Google')} startIcon={<GoogleIcon />}>
             Sign in with Google
           </Button>
 
@@ -151,18 +131,18 @@ const SignIn = () => {
             startIcon={<FacebookIcon />}
           >
             Sign in with Facebook
-          </Button>
+          </Button> */}
 
           <Typography sx={{ textAlign: 'center' }}>
             Don&apos;t have an account?{' '}
-            <Link href="/material-ui/getting-started/templates/sign-in/" variant="body2" sx={{ alignSelf: 'center' }}>
+            <Link component={RouterLink} to="/auth/sign-up/" variant="body2" sx={{ alignSelf: 'center' }}>
               Sign up
             </Link>
           </Typography>
         </Box>
-      </SignInCardStyled>
-    </SignInContainerStyled>
+      </SignCardStyled>
+    </SignContainerStyled>
   );
-};
+});
 
 export default SignIn;

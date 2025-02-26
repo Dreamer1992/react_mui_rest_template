@@ -1,34 +1,18 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Stack from '@mui/material/Stack';
-import MuiToolbar from '@mui/material/Toolbar';
-import { tabsClasses } from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuButton from '@/components/common/MenuButton/MenuButton';
 import ColorModeIconDropdown from '@/components/common/ColorModeIconDropdown/ColorModeIconDropdown';
+
 import DashboardRoundedIcon from './components/DashboardRoundedIcon/DashboardRoundedIcon';
 import SideMenuMobile from './components/SideMenuMobile/SideMenuMobile';
+import ToolbarStyled from './components/ToolbarStyled/ToolbarStyled';
+import { observer } from 'mobx-react-lite';
 
-const Toolbar = styled(MuiToolbar)({
-  width: '100%',
-  padding: '12px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'start',
-  justifyContent: 'center',
-  gap: '12px',
-  flexShrink: 0,
-  [`& ${tabsClasses.flexContainer}`]: {
-    gap: '8px',
-    p: '8px',
-    pb: 0,
-  },
-});
-
-const AppNavbar = () => {
-  const [open, setOpen] = React.useState(false);
+const AppNavbar = observer(() => {
+  const [open, setOpen] = useState<boolean>(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -47,7 +31,7 @@ const AppNavbar = () => {
         top: 'var(--template-frame-height, 0px)',
       }}
     >
-      <Toolbar variant="regular">
+      <ToolbarStyled variant="regular">
         <Stack
           direction="row"
           sx={{
@@ -59,20 +43,23 @@ const AppNavbar = () => {
         >
           <Stack direction="row" spacing={1} sx={{ justifyContent: 'center', mr: 'auto' }}>
             <DashboardRoundedIcon />
+
             <Typography variant="h4" component="h1" sx={{ color: 'text.primary' }}>
               Dashboard
             </Typography>
           </Stack>
 
           <ColorModeIconDropdown />
+
           <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
             <MenuRoundedIcon />
           </MenuButton>
+
           <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
         </Stack>
-      </Toolbar>
+      </ToolbarStyled>
     </AppBar>
   );
-};
+});
 
 export default AppNavbar;

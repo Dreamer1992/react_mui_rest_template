@@ -7,12 +7,8 @@ export const USER_ROLES = {
 export type TUserRoles = (typeof USER_ROLES)[keyof typeof USER_ROLES];
 
 export interface IUser {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: TUserRoles;
-}
-
-export interface IUserStore {
-  user: IUser;
-  setUser: (user: IUser) => void;
 }

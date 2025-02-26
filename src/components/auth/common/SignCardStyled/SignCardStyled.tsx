@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import MuiCard from '@mui/material/Card';
 
-const SignInCardStyled = styled(MuiCard)(({ theme }) => ({
+const SignCardStyled = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignSelf: 'center',
@@ -9,7 +9,7 @@ const SignInCardStyled = styled(MuiCard)(({ theme }) => ({
   padding: theme.spacing(4),
   gap: theme.spacing(2),
   margin: 'auto',
-  overflow: 'auto',
+  overflow: 'unset',
   [theme.breakpoints.up('sm')]: {
     maxWidth: '450px',
   },
@@ -19,4 +19,4 @@ const SignInCardStyled = styled(MuiCard)(({ theme }) => ({
   }),
 }));
 
-export default SignInCardStyled;
+export default SignCardStyled;
