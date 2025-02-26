@@ -27,7 +27,8 @@
       "@types/*": ["./src/types/*"],
       "@store/*": ["./src/store/*"],
       "@components/*": ["./src/components/*"],
-      "@providers/*": ["./src/providers/*"]
+      "@providers/*": ["./src/providers/*"],
+      "@icons/*": ["./src/icons/*"]
     }
   },
   "include": ["src"]
