@@ -11,7 +11,8 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "prepare": "husky",
     "lint-staged": "lint-staged",
-    "check": "npm run lint && npm run format"
+    "check": "npm run lint && npm run format",
+    "msw:init": "msw init public/"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -28,6 +29,8 @@
     "@hookform/resolvers": "^4.1.2",
     "@mui/icons-material": "^6.4.5",
     "@mui/material": "^6.4.5",
+    "axios": "^1.8.1",
+    "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "mobx": "^6.13.6",
     "mobx-react-lite": "^4.1.0",
@@ -40,6 +43,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.15",
     "@types/node": "^22.13.5",
     "@types/react": "^19.0.10",
@@ -51,9 +55,15 @@
     "globals": "^15.15.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
+    "msw": "^2.7.3",
     "prettier": "^3.5.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

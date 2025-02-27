@@ -39,7 +39,7 @@ const SignUp = observer(() => {
         <SitemarkIcon />
 
         <Typography component="h1" variant="h4" sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}>
-          Sign up
+          Регистрация
         </Typography>
 
         <Box
@@ -50,27 +50,27 @@ const SignUp = observer(() => {
           <FormInputText
             control={control}
             name="firstName"
-            label="First name"
+            label="Имя"
             required
-            placeholder="John"
+            placeholder="Иван"
             autoComplete="name"
           />
 
           <FormInputText
             control={control}
             name="lastName"
-            label="Last name"
+            label="Фамилия"
             required
-            placeholder="Carter"
+            placeholder="Иванов"
             autoComplete="name"
           />
 
           <FormInputText
             control={control}
             name="email"
-            label="Email"
+            label="Почта"
             required
-            placeholder="john@email.com"
+            placeholder="ivan@email.com"
             type="email"
             autoComplete="email"
           />
@@ -78,7 +78,7 @@ const SignUp = observer(() => {
           <FormInputText
             control={control}
             name="password"
-            label="Password"
+            label="Пароль"
             required
             placeholder="••••••"
             type="password"
@@ -88,7 +88,7 @@ const SignUp = observer(() => {
           <FormInputText
             control={control}
             name="passwordConfirmation"
-            label="Password confirmation"
+            label="Подтверждение пароля"
             required
             placeholder="••••••"
             type="password"
@@ -96,7 +96,7 @@ const SignUp = observer(() => {
           />
 
           <Button type="submit" fullWidth variant={isDisabled ? 'outlined' : 'contained'} disabled={isDisabled}>
-            Sign up
+            Зарегистрироваться
           </Button>
         </Box>
 
@@ -119,9 +119,9 @@ const SignUp = observer(() => {
           </Button> */}
 
           <Typography sx={{ textAlign: 'center' }}>
-            Already have an account?{' '}
+            У вас уже есть учетная запись?{' '}
             <Link component={RouterLink} to="/auth/sign-in/" variant="body2" sx={{ alignSelf: 'center' }}>
-              Sign in
+              Войти
             </Link>
           </Typography>
         </Box>

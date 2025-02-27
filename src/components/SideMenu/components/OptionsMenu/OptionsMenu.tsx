@@ -11,6 +11,7 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from '@/components/common/MenuButton/MenuButton';
 import { observer } from 'mobx-react-lite';
+import { useLogout } from '@hooks/useLogout';
 
 const MenuItem = styled(MuiMenuItem)({
   margin: '2px 0',
@@ -18,6 +19,8 @@ const MenuItem = styled(MuiMenuItem)({
 
 const OptionsMenu = observer(() => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+
+  const { logout } = useLogout();
 
   const open = Boolean(anchorEl);
 
@@ -27,6 +30,11 @@ const OptionsMenu = observer(() => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleClose();
   };
 
   return (
@@ -55,14 +63,14 @@ const OptionsMenu = observer(() => {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Профиль</MenuItem>
+        <MenuItem onClick={handleClose}>Мой аккаунт</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>Add another account</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={handleClose}>Добавить другой аккаунт</MenuItem>
+        <MenuItem onClick={handleClose}>Настройки</MenuItem>
         <Divider />
         <MenuItem
-          onClick={handleClose}
+          onClick={handleLogout}
           sx={{
             [`& .${listItemIconClasses.root}`]: {
               ml: 'auto',
@@ -70,7 +78,7 @@ const OptionsMenu = observer(() => {
             },
           }}
         >
-          <ListItemText>Logout</ListItemText>
+          <ListItemText>Выйти</ListItemText>
           <ListItemIcon>
             <LogoutRoundedIcon fontSize="small" />
           </ListItemIcon>

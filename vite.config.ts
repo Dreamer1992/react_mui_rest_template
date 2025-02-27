@@ -13,6 +13,13 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
       '@providers': path.resolve(__dirname, './src/providers'),
       '@icons': path.resolve(__dirname, './src/icons'),
+      '@api': path.resolve(__dirname, './src/api'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+    },
+  },
+  server: {
+    headers: {
+      'Cache-Control': 'no-store',
     },
   },
 });

@@ -16,7 +16,7 @@ const MainContent = observer(() => {
     >
       <Box sx={{ flexGrow: 1 }}>
         <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-          Content
+          Контент
         </Typography>
 
         <Grid container spacing={2} columns={12}>

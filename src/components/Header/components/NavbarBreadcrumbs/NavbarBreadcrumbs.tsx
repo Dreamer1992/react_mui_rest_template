@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Breadcrumbs, { breadcrumbsClasses } from '@mui/material/Breadcrumbs';
-import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
+import { Typography, Breadcrumbs, breadcrumbsClasses } from '@mui/material';
+import { HomeOutlined, NavigateNextRounded } from '@mui/icons-material';
+import { observer } from 'mobx-react-lite';
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   margin: theme.spacing(1, 0),
@@ -14,15 +14,17 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   },
 }));
 
-const NavbarBreadcrumbs = () => {
+const NavbarBreadcrumbs = observer(() => {
   return (
-    <StyledBreadcrumbs aria-label="breadcrumb" separator={<NavigateNextRoundedIcon fontSize="small" />}>
-      <Typography variant="body1">Dashboard</Typography>
+    <StyledBreadcrumbs aria-label="breadcrumb" separator={<NavigateNextRounded fontSize="small" />}>
+      <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+        <HomeOutlined fontSize="small" />
+      </Typography>
       <Typography variant="body1" sx={{ color: 'text.primary', fontWeight: 600 }}>
-        Home
+        Главная
       </Typography>
     </StyledBreadcrumbs>
   );
-};
+});
 
 export default NavbarBreadcrumbs;

@@ -15,7 +15,7 @@ const Header = observer(() => {
         alignItems: { xs: 'flex-start', md: 'center' },
         justifyContent: 'space-between',
         maxWidth: { sm: '100%', md: '1900px' },
-        pt: 1.5,
+        py: 1.5,
       }}
       spacing={2}
     >

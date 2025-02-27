@@ -28,7 +28,9 @@
       "@store/*": ["./src/store/*"],
       "@components/*": ["./src/components/*"],
       "@providers/*": ["./src/providers/*"],
-      "@icons/*": ["./src/icons/*"]
+      "@icons/*": ["./src/icons/*"],
+      "@api/*": ["./src/api/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src"]

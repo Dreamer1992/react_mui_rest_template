@@ -6,13 +6,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { observer } from 'mobx-react-lite';
 
 interface IForgotPasswordProps {
   open: boolean;
   handleClose: () => void;
 }
 
-const ForgotPassword = ({ open, handleClose }: IForgotPasswordProps) => {
+const ForgotPassword = observer(({ open, handleClose }: IForgotPasswordProps) => {
   return (
     <Dialog
       open={open}
@@ -28,10 +29,11 @@ const ForgotPassword = ({ open, handleClose }: IForgotPasswordProps) => {
         },
       }}
     >
-      <DialogTitle>Reset password</DialogTitle>
+      <DialogTitle>Сброс пароля</DialogTitle>
+
       <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
         <DialogContentText>
-          Enter your account&apos;s email address, and we&apos;ll send you a link to reset your password.
+          Введите адрес электронной почты вашего аккаунта, и мы отправим вам ссылку для сброса пароля.
         </DialogContentText>
         <OutlinedInput
           autoFocus
@@ -39,20 +41,21 @@ const ForgotPassword = ({ open, handleClose }: IForgotPasswordProps) => {
           margin="dense"
           id="email"
           name="email"
-          label="Email address"
-          placeholder="Email address"
+          label="Почта"
+          placeholder="Почта"
           type="email"
           fullWidth
         />
       </DialogContent>
+
       <DialogActions sx={{ pb: 3, px: 3 }}>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>Отменить</Button>
         <Button variant="contained" type="submit">
-          Continue
+          Продолжить
         </Button>
       </DialogActions>
     </Dialog>
   );
-};
+});
 
 export default ForgotPassword;

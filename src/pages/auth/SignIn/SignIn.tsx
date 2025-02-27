@@ -15,11 +15,12 @@ import {
 } from '@/components/auth/SignInPage/schema/signInSchema';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/store';
-import { IUser, USER_ROLES } from '@/types/user';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { ApiClient } from '@/api/APIClient';
 
 const SignIn = observer(() => {
   const { userStore } = useStore();
+  const navigate = useNavigate();
 
   const [openForgotPassword, setOpenForgotPassword] = useState(false);
 
@@ -45,15 +46,22 @@ const SignIn = observer(() => {
     setOpenForgotPassword(false);
   };
 
-  const handleSignIn = (data: TSignInSchema) => {
-    const user: IUser = {
-      email: data.email,
-      firstName: 'John',
-      lastName: 'Carter',
-      role: USER_ROLES.GUEST,
-    };
+  const handleSignIn = async (data: TSignInSchema) => {
+    try {
+      const loginResponse = await ApiClient.login(data);
+      const { user } = loginResponse.data.resultData;
 
-    userStore.user = user;
+      userStore.user = {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        role: user.role,
+      };
+
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Sign in failed:', error);
+    }
   };
 
   return (
@@ -64,12 +72,15 @@ const SignIn = observer(() => {
         <SitemarkIcon />
 
         <Typography component="h1" variant="h4" sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}>
-          Sign in
+          Вход в систему
         </Typography>
 
         <Box
           component="form"
-          onSubmit={handleSubmit(handleSignIn)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(handleSignIn)(e);
+          }}
           noValidate
           sx={{
             display: 'flex',
@@ -81,9 +92,9 @@ const SignIn = observer(() => {
           <FormInputText
             control={control}
             name="email"
-            label="Email"
+            label="Почта"
             required
-            placeholder="john@email.com"
+            placeholder="ivan@email.com"
             type="email"
             autoComplete="email"
           />
@@ -91,7 +102,7 @@ const SignIn = observer(() => {
           <FormInputText
             control={control}
             name="password"
-            label="Password"
+            label="Пароль"
             required
             placeholder="••••••"
             type="password"
@@ -101,7 +112,7 @@ const SignIn = observer(() => {
           <ForgotPassword open={openForgotPassword} handleClose={handleForgotPasswordClose} />
 
           <Button type="submit" fullWidth variant={isDisabled ? 'outlined' : 'contained'} disabled={isDisabled}>
-            Sign in
+            Войти
           </Button>
 
           <Link
@@ -111,7 +122,7 @@ const SignIn = observer(() => {
             variant="body2"
             sx={{ alignSelf: 'center' }}
           >
-            Forgot your password?
+            Забыли пароль?
           </Link>
         </Box>
 
@@ -134,9 +145,9 @@ const SignIn = observer(() => {
           </Button> */}
 
           <Typography sx={{ textAlign: 'center' }}>
-            Don&apos;t have an account?{' '}
+            У вас нет учетной записи?{' '}
             <Link component={RouterLink} to="/auth/sign-up/" variant="body2" sx={{ alignSelf: 'center' }}>
-              Sign up
+              Регистрация
             </Link>
           </Typography>
         </Box>

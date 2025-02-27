@@ -1,16 +1,25 @@
+import { observer } from 'mobx-react-lite';
+import { useAuth } from '@/hooks/useAuth';
+import { Box, CircularProgress } from '@mui/material';
+import ThemeProvider from '@/providers/themeProvider/ThemeProvider';
 import { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import ThemeProvider from '@/providers/themeProvider/ThemeProvider';
 import { publicRoutes, protectedRoutes } from '@/routes/routes';
-import { useAuth } from '@/hooks/useAuth';
-import { observer } from 'mobx-react-lite';
 
 const App = observer((props: { disableCustomTheme?: boolean }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
   const routes = useRoutes(isAuthenticated ? protectedRoutes : publicRoutes);
+
+  if (isLoading) {
+    return (
+      <ThemeProvider {...props}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100dvh' }}>
+          <CircularProgress />
+        </Box>
+      </ThemeProvider>
+    );
+  }
 
   return (
     <ThemeProvider {...props}>
